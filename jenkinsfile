@@ -1,0 +1,64 @@
+def logfile = new File("/tmp/Cms-Portal-Dev-Pipeline.txt")
+def final_result = []
+
+pipeline {
+    agent {
+        node {
+            label 'master'
+        }
+    }
+    stages {
+        stage('Clone repo') {
+            steps {
+               git url: 'git@gitlabxxxxxxxxxxxxxxxxxxx.git'
+            }
+        }
+        stage('Create report file') {
+            steps {
+                sh '''
+                echo "" > /tmp/Celine.txt
+                chmod 777 /tmp/Celine.txt
+                '''
+            }
+        }
+    stage('Building report') {
+            steps {
+                
+                script {
+                    get_list = new File("${WORKSPACE}/PIPELINES-ADMIN-VALIDATION/Ce/DevPipeline-CheckList").text.readLines()
+                    for(jobName in get_list){
+                        def job = jenkins.model.Jenkins.instance.getItemByFullName(jobName)
+                        def result = job.getLastBuild().getResult().toString()
+                        echo jobName + " --> " + result + "\n"
+                        def final_result_get = jobName + " ==> " + result + "\n" + "\n"
+                        logfile.append(final_result_get)
+                        final_result.add(jobName + " ==> " + result + " \n")
+                    }
+                }
+                println(final_result)
+                cleanWs()
+            }
+        }
+    stage('Sending Email') {
+            steps {
+                sh '''
+                pipeline_result=`cat /tmp/Cms-Portal-Dev-Pipeline.txt | awk {'print $3'} | awk /./ |  sort | uniq`
+                if [[ $pipeline_result -eq "SUCCESS" ]]
+                then
+                pipeline_status="PASSED"
+                elif  [[ $pipeline_result -eq "null" ]]
+                then
+                pipeline_status="PASSED"
+                else
+                pipeline_status="FAILED"
+                fi
+                cat /tmp/EPS-ECS-Services-Health-Check-DEV-PIPELINE-IDM-protractor-testautomation >> /tmp/Cms-Portal-Dev-Pipeline.txt
+                echo "" >> /tmp/Cms-Portal-Dev-Pipeline.txt
+                echo "Pipeline URL: http://10.138.8.86:8080/view/Cms-Portal-Dev-Pipeline/" >> /tmp/Cms-Portal-Dev-Pipeline.txt
+                cat /tmp/Cms-Portal-Dev-Pipeline.txt | mailx -S smtp=smeserver AdminValidation@gmail.com -s "Pipeline Result - $pipeline_status" managern@gmail.com,seconManger@gmail.com
+                '''
+            }
+         
+    }
+}
+
