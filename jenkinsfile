@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Clone repo') {
             steps {
-               git url: 'git@gitlabxxxxxxxxxxxxxxxxxxx.git'
+               git url: 'https://github.com/capitalterefe/pipelineApp.git'
             }
         }
         stage('Create report file') {
@@ -42,7 +42,7 @@ pipeline {
     stage('Sending Email') {
             steps {
                 sh '''
-                pipeline_result=`cat /tmp/Cms-Portal-Dev-Pipeline.txt | awk {'print $3'} | awk /./ |  sort | uniq`
+                pipeline_result=`cat /tmp/pipeline.txt | awk {'print $3'} | awk /./ |  sort | uniq`
                 if [[ $pipeline_result -eq "SUCCESS" ]]
                 then
                 pipeline_status="PASSED"
@@ -52,10 +52,10 @@ pipeline {
                 else
                 pipeline_status="FAILED"
                 fi
-                cat /tmp/EPS-ECS-Services-Health-Check-DEV-PIPELINE-IDM-protractor-testautomation >> /tmp/Cms-Portal-Dev-Pipeline.txt
-                echo "" >> /tmp/Cms-Portal-Dev-Pipeline.txt
-                echo "Pipeline URL: http://10.138.8.86:8080/view/Cms-Portal-Dev-Pipeline/" >> /tmp/Cms-Portal-Dev-Pipeline.txt
-                cat /tmp/Cms-Portal-Dev-Pipeline.txt | mailx -S smtp=smeserver AdminValidation@gmail.com -s "Pipeline Result - $pipeline_status" managern@gmail.com,seconManger@gmail.com
+               
+                echo "" >> /tmp/pipeline.txt
+                echo "Pipeline URL: http://jenkins:8080/view/pipeline/" >> /tmp/pipeline.txt
+                cat /tmp/pipeline.txt | mailx -S smtp=smeserver AdminValidation@gmail.com -s "Pipeline Result - $pipeline_status" managern@gmail.com,seconManger@gmail.com
                 '''
             }
          
