@@ -1,11 +1,6 @@
 def logfile = new File("/tmp/pipeline.txt")
 def final_result = []
-import hudson.model.*
-import hudson.maven.*
-import hudson.tasks.*
-import jenkins.model.Jenkins
-import hudson.maven.reporters.*
-import hudson.plugins.emailext.*
+
 pipeline {
     agent {
         node {
@@ -37,7 +32,7 @@ pipeline {
                     for(jobName in get_list){
                         def job = jenkins.model.Jenkins.instance.getItemByFullName(jobName)
                         def last_job_num = job.getLastBuild().getNumber()
-                                       
+                        echo "last job numb" + last_job_num         
                         def timeTook = job.getBuildByNumber(last_job_num).getTime()
                         def result = job.getLastBuild().getResult().toString()
                         echo jobName + " --> " + result + "\n"
