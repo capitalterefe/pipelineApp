@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Clone repo') {
             steps {
-               git url: 'https://github.com/capitalterefe/pipelineApp.git'
+               git url: 'git@github.com:capitalterefe/pipelineApp.git'
             }
         }
         stage('Create report file') {
