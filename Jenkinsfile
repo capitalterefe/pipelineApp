@@ -1,6 +1,11 @@
 def logfile = new File("/tmp/pipeline.txt")
 def final_result = []
-
+import hudson.model.*
+import hudson.maven.*
+import hudson.tasks.*
+import jenkins.model.Jenkins
+import hudson.maven.reporters.*
+import hudson.plugins.emailext.*
 pipeline {
     agent {
         node {
