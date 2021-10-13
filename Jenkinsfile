@@ -37,10 +37,11 @@ pipeline {
                     for(jobName in get_list){
                         def job = jenkins.model.Jenkins.instance.getItemByFullName(jobName)
                         def last_job_num = job.getLastBuild().getNumber()
-                        def timeTook = job.getBuildByNumber(last_job_num)
+                                       
+                        def timeTook = job.getBuildByNumber(last_job_num).getTime()
                         def result = job.getLastBuild().getResult().toString()
                         echo jobName + " --> " + result + "\n"
-                        echo TimeTook + " --> " + timeTook + "\n"
+                        echo timeTook + " --> " + TimeTook + "\n"
                         def final_result_get = jobName + " ==> " + result + "\n" + "\n"
                         logfile.append(final_result_get)
                         final_result.add(jobName + " ==> " + result + " \n")
