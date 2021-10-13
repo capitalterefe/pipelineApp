@@ -1,4 +1,4 @@
-def logfile = new File("/tmp/Cms-Portal-Dev-Pipeline.txt")
+def logfile = new File("/tmp/pipeline.txt")
 def final_result = []
 
 pipeline {
@@ -16,8 +16,8 @@ pipeline {
         stage('Create report file') {
             steps {
                 sh '''
-                echo "" > /tmp/Celine.txt
-                chmod 777 /tmp/Celine.txt
+                echo "" > /tmp/pipeline.txt
+                chmod 777 /tmp/pipeline.txt
                 '''
             }
         }
@@ -25,7 +25,7 @@ pipeline {
             steps {
                 
                 script {
-                    get_list = new File("${WORKSPACE}/PIPELINES-ADMIN-VALIDATION/Ce/DevPipeline-CheckList").text.readLines()
+                    get_list = new File("${WORKSPACE}/pipeline-CheckList").text.readLines()
                     for(jobName in get_list){
                         def job = jenkins.model.Jenkins.instance.getItemByFullName(jobName)
                         def result = job.getLastBuild().getResult().toString()
