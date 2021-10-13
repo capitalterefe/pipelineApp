@@ -11,6 +11,9 @@ pipeline {
         stage('Clone repo') {
             steps {
               // git url: 'https://github.com/capitalterefe/pipelineApp.git'
+                 sh '''
+                echo "Hello World"
+                '''
             }
         }
         stage('Create report file') {
