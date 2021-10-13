@@ -32,7 +32,7 @@ pipeline {
                     for(jobName in get_list){
                         def job = jenkins.model.Jenkins.instance.getItemByFullName(jobName)
                         last_job_num = job.getLastBuild().getNumber()
-                        def timeTook = job.getBuildByNumber(last_job_num).getTime()
+                        def timeTook = job.getBuildByNumber(last_job_num)
                         def result = job.getLastBuild().getResult().toString()
                         echo jobName + " --> " + result + "\n"
                         echo TimeTook + " --> " + timeTook + "\n"
