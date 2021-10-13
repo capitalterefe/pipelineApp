@@ -42,7 +42,7 @@ pipeline {
                     }
                 }
                 println(final_result)
-                cleanWs()
+               // cleanWs()
             }
         }
     stage('Sending Email') {
