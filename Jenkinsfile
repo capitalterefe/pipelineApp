@@ -31,7 +31,7 @@ pipeline {
                     get_list = new File("${WORKSPACE}/pipeline-CheckList").text.readLines()
                     for(jobName in get_list){
                         def job = jenkins.model.Jenkins.instance.getItemByFullName(jobName)
-                        def last_job_num = job.getLastBuild().getNumber()
+                        last_job_num = job.getLastBuild().getNumber()
                         echo "last job numb" + last_job_num         
                         def timeTook = job.getBuildByNumber(last_job_num).getTime()
                         def result = job.getLastBuild().getResult().toString()
