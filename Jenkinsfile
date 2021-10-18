@@ -38,9 +38,9 @@ pipeline {
                         def duration = job.getLastBuild().getDurationString()
                         echo "|"+ jobName.toUpperCase() + "| STATUS: " + result + "| Latest Job Completed at: "+date_and_time +"| Latest Job Took: "+duration 
                        
-                        def final_result_get = jobName + " --> STATUS: " + result + "\t" + "Job Completed: "+date_and_time +"\t" +"Job Took: "+duration  + "\n"
+                        def final_result_get = "|"+ jobName.toUpperCase() + "| STATUS: " + result + "| Latest Job Completed at: "+date_and_time +"| Latest Job Took: "+duration  + "\n"
                         logfile.append(final_result_get)
-                        final_result.add(jobName + " --> STATUS: " + result + "\t" + "Job Completed: "+date_and_time +"\t" +"Job Took: "+duration  + "\n")
+                        final_result.add("|"+ jobName.toUpperCase() + "| STATUS: " + result + "| Latest Job Completed at: "+date_and_time +"| Latest Job Took: "+duration   + "\n")
                         
                     }
                 }
