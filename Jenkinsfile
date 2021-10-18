@@ -32,11 +32,11 @@ pipeline {
                     for(jobName in get_list){
                         def job = jenkins.model.Jenkins.instance.getItemByFullName(jobName)
                         last_job_num = job.getLastBuild().getNumber()
-                        echo "last job numb " + last_job_num         
-                        def date_and_time = job.getBuildByNumber(last_job_num).getTime().toString()
+                              
+                        def date_and_time = job.getBuildByNumber(job.getLastBuild().getNumber()).getTime().toString()
                         def result = job.getLastBuild().getResult().toString()
                         def duration = job.getLastBuild().getDurationString()
-                        echo jobName + " --> STATUS: " + result + "\t" + "Job Completed: "+date_and_time +"\t" +"Job Took: "+duration 
+                        echo "|"+ jobName.toUpperCase() + "| STATUS: " + result + "| Latest Job Completed at: "+date_and_time +"| Latest Job Took: "+duration 
                        
                         def final_result_get = jobName + " --> STATUS: " + result + "\t" + "Job Completed: "+date_and_time +"\t" +"Job Took: "+duration  + "\n"
                         logfile.append(final_result_get)
