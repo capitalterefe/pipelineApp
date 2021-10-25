@@ -38,6 +38,9 @@ pipeline {
                         echo  "woutTostring " + date_and_time_woutTostring
                          def miltoDate =  new Date(date_and_time_woutTostring).format("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
                         echo "milToDate "+ miltoDate
+                        def miltoDateMon =  new Date(date_and_time_woutTostring).format("EEE, MMM d,yy")
+                        echo "milToDateMon "+ miltoDateMon
+                        
                         def result = job.getLastBuild().getResult().toString()
                         def duration = job.getLastBuild().getDurationString()
                         echo "|"+ jobName.toUpperCase() + "| STATUS: " + result + "| Latest Job Completed at: "+date_and_time +"| Latest Job Took: "+duration 
