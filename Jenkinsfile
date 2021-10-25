@@ -38,8 +38,13 @@ pipeline {
                         echo  "woutTostring " + date_and_time_woutTostring
                          def miltoDate =  new Date(date_and_time_woutTostring).format("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
                         echo "milToDate "+ miltoDate
-                        def miltoDateMon =  new Date(date_and_time_woutTostring).format("EEE MMM d HH:mm:ss +'EDT'+ yyyy ")
+                        def miltoDateMon =  new Date(date_and_time_woutTostring).format("EEE MMM d HH:mm:ss 'EDT' yyyy ")
                         echo "milToDateMon "+ miltoDateMon
+                        
+                        def fiftenmin= date_and_time_woutTostring + (15*60*1000)
+                        echo "fiftenmin_milim" + fiftenmin
+                        def miltoDateMon_fifteen =  new Date(fiftenmin).format("EEE MMM d HH:mm:ss 'EDT' yyyy ")
+                        echo "milToDatefiftennMin "+ miltoDateMon_fifteen
                         
                         def result = job.getLastBuild().getResult().toString()
                         def duration = job.getLastBuild().getDurationString()
