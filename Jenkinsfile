@@ -50,6 +50,7 @@ pipeline {
                         def duration = job.getLastBuild().getDurationString()
                         def duration_mil = job.getLastBuild().getDuration()
                         echo "duration in miliseconds " + duration_mil 
+                        echo "duration in minutes" + duration_mil/60000
                         echo "|"+ jobName.toUpperCase() + "| STATUS: " + result + "| Latest Job Completed at: "+date_and_time +"| Latest Job Took: "+duration 
                        
                         def final_result_get = "|"+ jobName.toUpperCase() + "| STATUS: " + result + "| Latest Job Completed at: "+date_and_time +"| Latest Job Took: "+duration  + "\n"
