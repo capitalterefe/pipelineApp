@@ -38,7 +38,7 @@ pipeline {
                         echo  "woutTostring " + date_and_time_woutTostring
                          def miltoDate =  new Date(date_and_time_woutTostring).format("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
                         echo "milToDate "+ miltoDate
-                        def miltoDateMon =  new Date(date_and_time_woutTostring).format("EEE MMM d HH:mm:ss EDT yyyy ")
+                        def miltoDateMon =  new Date(date_and_time_woutTostring).format("EEE MMM d HH:mm:ss +'EDT'+ yyyy ")
                         echo "milToDateMon "+ miltoDateMon
                         
                         def result = job.getLastBuild().getResult().toString()
