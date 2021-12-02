@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit
 pipeline {
     agent {
         node {
-            label 'Built-In Node'
+            label 'master'
         }
     }
     stages {
