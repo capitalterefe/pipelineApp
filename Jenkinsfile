@@ -1,6 +1,7 @@
 def logfile = new File("/tmp/pipeline.txt")
 def final_result = []
 import java.util.concurrent.TimeUnit
+import hudson.model.ParametersAction
 pipeline {
     agent {
         node {
