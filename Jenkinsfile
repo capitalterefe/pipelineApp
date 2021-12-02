@@ -33,7 +33,7 @@ pipeline {
                     for(jobName in get_list){
                         def job = jenkins.model.Jenkins.instance.getItemByFullName(jobName)
                         last_job_num = job.getLastBuild().getNumber()
-                        def props = getParams()
+                        def props = getParam()
                         echo "properties: " + props
                         def date_and_time = job.getBuildByNumber(job.getLastBuild().getNumber()).getTime().toString()
                          def  date_and_time_woutTostring = job.getBuildByNumber(job.getLastBuild().getNumber()).getTimeInMillis()
@@ -102,5 +102,15 @@ def getParams(){
   }
 
   return params
+}
+def getParam(){
+
+ 
+  def job = jenkins.model.Jenkins.instance.getItemByFullName("tr")
+                       
+  
+  
+
+  return job.getBuildByNumber(job.getLastBuild().getNumber()).getActions(ParametersAction).getParameter("stack")
 }
 
