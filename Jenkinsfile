@@ -105,12 +105,16 @@ def getParams(){
 }
 def getParam(){
 
- 
+ def params=[]
   def job = jenkins.model.Jenkins.instance.getItemByFullName("tr")
                        
-  
-   return job.getBuildByNumber(job.getLastBuild().getNumber()).getActions(ParametersAction).getParameters()
-    
-    
+  job.getBuildByNumber(job.getLastBuild().getNumber()).getActions(ParametersAction)
+  .each { action ->
+    action.getParameter("stack").each {
+      params << it
+    }
+  }
+
+  return params
 }
 
