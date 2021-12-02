@@ -109,8 +109,8 @@ def getParam(){
   def job = jenkins.model.Jenkins.instance.getItemByFullName("tr")
                        
   
-  
-
-  return job.getBuildByNumber(job.getLastBuild().getNumber()).getActions(ParametersAction).getParameter("stack")
+   return job.getBuildByNumber(job.getLastBuild().getNumber()).getActions(ParametersAction).getParameters()
+    
+    
 }
 
