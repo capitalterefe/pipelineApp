@@ -1,7 +1,6 @@
 def logfile = new File("/tmp/pipeline.txt")
 def final_result = []
 import java.util.concurrent.TimeUnit
-//import hudson.model.ParametersAction
 pipeline {
     agent {
         node {
@@ -94,7 +93,7 @@ def getParams(){
   def params=[]
   def job = jenkins.model.Jenkins.instance.getItemByFullName("tr")
                        
-  job.getBuildByNumber(job.getLastBuild().getNumber()).getActions(jenkins.model.ParametersAction)
+  job.getBuildByNumber(job.getLastBuild().getNumber()).getActions(ParametersAction)
   .each { action ->
     action.getParameters().each {
       params << it
