@@ -32,7 +32,7 @@ pipeline {
                     for(jobName in get_list){
                         def job = jenkins.model.Jenkins.instance.getItemByFullName(jobName)
                         last_job_num = job.getLastBuild().getNumber()
-                        def props = job.getLastBuild().getProperties()
+                        def props = job.getLastBuild().getActions(hudson.model.ParametersAction).getParameters() 
                         echo "properties: " + props
                         def date_and_time = job.getBuildByNumber(job.getLastBuild().getNumber()).getTime().toString()
                          def  date_and_time_woutTostring = job.getBuildByNumber(job.getLastBuild().getNumber()).getTimeInMillis()
