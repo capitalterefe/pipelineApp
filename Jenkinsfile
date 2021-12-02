@@ -2,11 +2,7 @@ def logfile = new File("/tmp/pipeline.txt")
 def final_result = []
 import java.util.concurrent.TimeUnit
 pipeline {
-    agent {
-        node {
-            label 'master'
-        }
-    }
+    
     stages {
         stage('Clone repo') {
             steps {
